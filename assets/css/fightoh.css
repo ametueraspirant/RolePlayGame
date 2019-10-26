@@ -1,0 +1,29 @@
+body
+{
+    font-family: 'UniqueRegular';
+    font-weight: normal;
+    font-style: normal; 
+}
+
+.fighter
+{
+    padding: 0;
+}
+.fighter_image
+{
+    width: 100%;
+    border: 2px solid black;
+}
+
+.fighter_banner
+{
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    line-height: 140%;
+    font-weight: bold;
+    background-color: orangered;
+    font-size: 20px;
+    bottom: 15px;
+    text-align: center;
+}

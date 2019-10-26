@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang = "en-us" style = "overflow: hidden;">
+
+<head>
+    <meta charset="UTF-8">
+    <title>fightystickm'bobber</title>
+
+    <link rel = "stylesheet" href = "assets/css/reset.css" type = "text/css">
+
+    <link rel = "stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity = "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin = "anonymous">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/unique" type="text/css">
+
+    <link rel = "stylesheet" href = "assets/css/fightoh.css" type = "text/css">
+</head>
+
+<body onload = "on_load()">
+    <div id = "big_div" class = "container">
+        <div id = "top_div" class = "row">
+            <h1>Choose your Character!</h1>
+        </div>
+        <div id = "mid_div" class = "row">
+
+        </div>
+        <div id = "bot_div" class = "row">
+
+        </div>
+        <div id = "but_div" class = "row">
+
+        </div>
+    </div>
+
+    <script type = "text/javascript">
+        //initial variables setupp
+        var fighters =
+        [
+            {fighter: "daisy", base_attack: 7, base_attack_growth: 7, counter_attack: 3, health: 65,},
+            {fighter: "iceclimbers", base_attack: 6, base_attack_growth: 6, counter_attack: 6, health: 70},
+            {fighter: "isabelle", base_attack: 3, base_attack_growth: 3, counter_attack: 10, health: 95},
+            {fighter: "link", base_attack: 5, base_attack_growth: 5, counter_attack: 7, health: 75},
+            {fighter: "mario", base_attack: 5, base_attack_growth: 5, counter_attack: 5, health: 75},
+            {fighter: "rosalina", base_attack: 7, base_attack_growth: 7, counter_attack: 2, health: 65},
+            {fighter: "yoshi", base_attack: 6, base_attack_growth: 6, counter_attack: 4, health: 70},
+            {fighter: "zelda", base_attack: 8, base_attack_growth: 8, counter_attack: 1, health: 60}
+        ]
+        var player_1 = {};
+        var player_2 = {};
+        var game_state = 1;
+
+        //draw up the players
+        function player_append(obj, row)
+        {
+            var draw_fighter = obj.fighter
+            $(row).append("<div id = " + draw_fighter + " class = 'fighter col-md-2'></div>");
+            $("#" + draw_fighter).append("<img src='assets/images/" + draw_fighter + ".png' class='fighter_image'>");
+            $("#" + draw_fighter).append("<div class='fighter_banner'>" + draw_fighter + "</div>");
+            $(row).on("click", ".fighter", function fighter_click()
+            {
+                if(game_state = 1)
+                {
+                    //how do I call these?
+                    this.remove();
+                    player_append();
+                }
+            });
+        }
+
+        function on_load()
+        {
+            for(var fight = 0; fight < fighters.length; fight++)
+            {
+                player_append(fighters[fight], "#mid_div");
+            }
+        }
+    </script>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
