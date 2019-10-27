@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang = "en-us" style = "overflow: hidden;">
+<html lang = "en-us">
 
 <head>
     <meta charset="UTF-8">
@@ -20,13 +20,28 @@
 <body onload = "on_load()">
     <div id = "big_div" class = "container">
         <div id = "top_div" class = "row">
-            <h1>Choose your Character!</h1>
+            <h1 id = "intro">Choose your Character!</h1>
         </div>
         <div id = "mid_div" class = "row">
 
         </div>
         <div id = "bot_div" class = "row">
+            <div class = "col-md-2"></div>
+            <div id = "first_player" class = "col-md-3">
 
+            </div>
+            <div class = "col-md-1">
+                <button id = "fight_button" class = "btn btn-danger">FIGHT!</button>
+                Your HP: 
+                <div id = "player_hp"></div>
+                <br>
+                Enemy HP:
+                <div id = "enemy_hp"></div>
+            </div>
+            <div id = "second_player" class = "col-md-3">
+
+            </div>
+            <div class = "col-md-2"></div>
         </div>
         <div id = "but_div" class = "row">
 
@@ -49,31 +64,119 @@
         var player_1 = {};
         var player_2 = {};
         var game_state = 1;
+        var player_1_health = 0;
+        var player_2_health = 0;
+        var player_1_attack = 0;
+        var player_1_attack_growth = 0;
+        var player_2_attack = 0;
+        var wins = 0;
 
         //draw up the players
-        function player_append(obj, row)
+        function player_append(obj, row, val, wid)
         {
             var draw_fighter = obj.fighter
-            $(row).append("<div id = " + draw_fighter + " class = 'fighter col-md-2'></div>");
+            $(row).append("<div id = " + draw_fighter + " class = 'fighter col-md-" + wid + "' value = " + val + "></div>");
             $("#" + draw_fighter).append("<img src='assets/images/" + draw_fighter + ".png' class='fighter_image'>");
             $("#" + draw_fighter).append("<div class='fighter_banner'>" + draw_fighter + "</div>");
-            $(row).on("click", ".fighter", function fighter_click()
+            $(row).on("click", "#" + draw_fighter, function fighter_click()
             {
-                if(game_state = 1)
+                var clicked = $(this).attr("value");
+                if(game_state === 1)
                 {
-                    //how do I call these?
                     this.remove();
-                    player_append();
+                    player_append(fighters[clicked], "#first_player", clicked, 12);
+                    player_1 = fighters[clicked];
+                    player_1_health = player_1.health;
+                    player_1_attack = player_1.base_attack;
+                    player_1_attack_growth = player_1.base_attack_growth;
+                    $("#player_hp").text(player_1_health);
+                    game_state = 2;
+                }
+                else if(game_state === 2)
+                {
+                    this.remove();
+                    player_append(fighters[clicked], "#second_player", clicked, 12);
+                    player_2 = fighters[clicked];
+                    player_2_attack = player_2.counter_attack;
+                    player_2_health = player_2.health;
+                    $("#enemy_hp").text(player_2_health);
+                    game_state = 3;
                 }
             });
         }
+        
+        $("#fight_button").click(function punch()
+        {
+            if(game_state === 3)
+            {
+                player_2_health -= player_1_attack;
+                player_1_health -= player_2_attack;
+                player_1_attack += player_1_attack_growth;
+                $("#player_hp").text(player_1_health)   ;
+                $("#enemy_hp").text(player_2_health);
+                if(player_1_health <= 0)
+                {
+                    $("#intro").text("YOU LOSE...");
+                    $("#fight_button").text("Try Again?");
+                    game_state = 4;
+                    return;
+                }
+                else if(player_2_health <= 0)
+                {
+                    var temp_val = $("#" + player_2.fighter).attr("value");
+                    $("#" + player_2.fighter).remove();
+                    player_append(fighters[temp_val], "#but_div", temp_val, 2);
+                    wins++;
+                    if(wins === 7)
+                    {
+                        game_state = 4;
+                        $("#intro").text("YOU WIN!");
+                        $("#fight_button").text("Play Again?");
+                        return;
+                    }
+                    game_state = 2;
+                    return;
+                }
+            }
+            if(game_state === 4)
+            {
+                game_reload();
+            }
+        });
 
         function on_load()
         {
             for(var fight = 0; fight < fighters.length; fight++)
             {
-                player_append(fighters[fight], "#mid_div");
+                player_append(fighters[fight], "#mid_div", fight, 2);
             }
+        }
+
+        function game_reload()
+        {
+            player_1 = {};
+            player_2 = {};
+            game_state = 1;
+            player_1_health = 0;
+            player_2_health = 0;
+            player_1_attack = 0;
+            player_1_attack_growth = 0;
+            player_2_attack = 0;
+            wins = 0;
+            game_state = 1;
+
+            $("#intro").text("Choose your Character!");
+            $("#fight_button").text("FIGHT!");
+
+            $("#mid_div").empty();
+            $("#first_player").empty();
+            $("#second_player").empty();
+            $("#player_hp").text("");
+            $("#enemy_hp").text("");
+            $("#but_div").empty();
+
+            on_load();
+
         }
     </script>
     
