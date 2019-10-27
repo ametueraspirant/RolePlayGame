@@ -91,6 +91,7 @@
                     player_1_attack_growth = player_1.base_attack_growth;
                     $("#player_hp").text(player_1_health);
                     game_state = 2;
+                    return;
                 }
                 else if(game_state === 2)
                 {
@@ -101,6 +102,7 @@
                     player_2_health = player_2.health;
                     $("#enemy_hp").text(player_2_health);
                     game_state = 3;
+                    return;
                 }
             });
         }
@@ -163,7 +165,6 @@
             player_1_attack_growth = 0;
             player_2_attack = 0;
             wins = 0;
-            game_state = 1;
 
             $("#intro").text("Choose your Character!");
             $("#fight_button").text("FIGHT!");
@@ -171,12 +172,11 @@
             $("#mid_div").empty();
             $("#first_player").empty();
             $("#second_player").empty();
-            $("#player_hp").text("");
-            $("#enemy_hp").text("");
+            $("#player_hp").empty();
+            $("#enemy_hp").empty();
             $("#but_div").empty();
 
             on_load();
-
         }
     </script>
     
