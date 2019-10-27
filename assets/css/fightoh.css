@@ -3,6 +3,8 @@ body
     font-family: 'UniqueRegular';
     font-weight: normal;
     font-style: normal; 
+    background-image: url("../images/finaldestination.jpg");
+    background-size: 100%;
 }
 
 .fighter
@@ -27,4 +29,9 @@ body
     font-size: 20px;
     bottom: 15px;
     text-align: center;
+}
+
+.whitetext
+{
+    color: white;
 }

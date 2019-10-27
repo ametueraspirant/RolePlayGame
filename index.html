@@ -30,7 +30,7 @@
             <div id = "first_player" class = "col-md-3">
 
             </div>
-            <div class = "col-md-1">
+            <div class = "whitetext col-md-1">
                 <button id = "fight_button" class = "btn btn-danger">FIGHT!</button>
                 Your HP: 
                 <div id = "player_hp"></div>
@@ -74,13 +74,18 @@
         //draw up the players
         function player_append(obj, row, val, wid)
         {
+            //image and banner printer
             var draw_fighter = obj.fighter
             $(row).append("<div id = " + draw_fighter + " class = 'fighter col-md-" + wid + "' value = " + val + "></div>");
             $("#" + draw_fighter).append("<img src='assets/images/" + draw_fighter + ".png' class='fighter_image'>");
             $("#" + draw_fighter).append("<div class='fighter_banner'>" + draw_fighter + "</div>");
+            //had to manually add the event listeners
             $(row).on("click", "#" + draw_fighter, function fighter_click()
             {
                 var clicked = $(this).attr("value");
+                //gamestates. probably bugged. after restarting the second time 
+                //it runs both of these code blocks at the same time despite after 
+                //reset being virtually indistinguishable from on first load.
                 if(game_state === 1)
                 {
                     this.remove();
@@ -107,8 +112,10 @@
             });
         }
         
+        //check if button press
         $("#fight_button").click(function punch()
         {
+            //more gamestates
             if(game_state === 3)
             {
                 player_2_health -= player_1_attack;
@@ -129,6 +136,7 @@
                     $("#" + player_2.fighter).remove();
                     player_append(fighters[temp_val], "#but_div", temp_val, 2);
                     wins++;
+                    //this doesn't work sitting out on its lonesome which irks me.
                     if(wins === 7)
                     {
                         game_state = 4;
@@ -140,12 +148,14 @@
                     return;
                 }
             }
+            //more buggy
             if(game_state === 4)
             {
                 game_reload();
             }
         });
 
+        //probably redundant.
         function on_load()
         {
             for(var fight = 0; fight < fighters.length; fight++)
@@ -154,6 +164,7 @@
             }
         }
 
+        //definitely redundant and buggy.
         function game_reload()
         {
             player_1 = {};
@@ -180,6 +191,7 @@
         }
     </script>
     
+    <!-- too many scripts what's the point. -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
