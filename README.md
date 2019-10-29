@@ -23,6 +23,6 @@ this is where the magic happens. condensing many lines of code down to a single 
 
 here's what I think is the source of my woes. it (tries) to reset the game.
 
-![image5](assets/images/readmegif.png)
+![image5](assets/images/readmegif.gif)
 
 and here's the beaute in action. ignore the different backgrounds I didn't have time to redo this part.
