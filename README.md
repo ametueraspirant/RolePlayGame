@@ -5,10 +5,12 @@ A themed fight the enemy simulator
 
 time for the big leagues. larger than average sized leagues? little more than medicore stature leagues?
 
+## if you want to play the game just click the link here https://ametueraspirant.github.io/RolePlayGame/
+
 the code's somewhat buggy but I managed to cut it down to two bugs.
 1. upon restarting the game sets both player 1 and player 2 as whatever was first clicked, and it is possible to win without defeating everybody.
 
-2. when an enemy is dead and you're selecting a new enemy it's possible to selet yourself.
+2. when an enemy is dead and you're selecting a new enemy it's possible to select yourself.
 
 here's some cool code.
 ![image2](assets/images/readme2.png)
